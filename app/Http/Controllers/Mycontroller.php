@@ -19,7 +19,9 @@ class Mycontroller extends Controller
 
     public function Viewproduct()
     {
-        return view('Viewproduct');
+        $data = addproduct::all();
+        return view('Viewproduct', ["data" => $data]);
+        //return view('Viewproduct');
     }
 
     public function adduser(Request $req)
@@ -78,6 +80,6 @@ class Mycontroller extends Controller
 
         ]);
         $add->save();
-        return redirect('addproduct');
+        return redirect('viewproduct');
     }
 }
