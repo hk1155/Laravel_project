@@ -77,5 +77,7 @@ class Mycontroller extends Controller
             'status' => 1
 
         ]);
+        $add->save();
+        return redirect('addproduct');
     }
 }

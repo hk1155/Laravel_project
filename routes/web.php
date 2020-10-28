@@ -33,5 +33,5 @@ Route::get('/logout', 'Mycontroller@logout');
 
 Route::post('/adduser', 'Mycontroller@adduser');
 Route::post('/login1', 'Mycontroller@login1');
-// Route::post('/insertproduct','Mycontroller@insertproduct')
+Route::post('/insertproduct','Mycontroller@insertproduct');
 
