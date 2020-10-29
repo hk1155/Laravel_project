@@ -49,9 +49,8 @@
             txtprice: {
                 required: true,
                 number: true,
-                min:0
+                min: 0
             },
-
         },
         messages: {
 
@@ -63,41 +62,9 @@
                 required: "Please enter Price",
                 min: 'Price should be greater than 0'
             },
-
         },
         submitHandler: function() {
-            $(".preloader2").show();
-            var form = $('#addproductform')[0];
-            var data = new FormData(form);
-            $.ajax({
-                dataType: "json",
-                type: "post",
-                contentType: false,
-                processData: false,
-                data: data,
-                url: '',
-                success: function(data) {
-                    if (data.success == 0) {
-                        $("#error").show();
-                        $('#errormsgr').html('<span>' + data.error + '</span>');
-                        $(".preloader2").hide();
-                        setTimeout(function() {
-                            $("#error").hide();
-                        }, 4000)
-                    }
-                    if (data.success == 1) {
-                        $(".preloader2").hide();
-                        $("#responser").show();
-                        $('#responsemsgr').html('<span>' + data.response + '</span>');
-                        $('#loginform').each(function() {
-                            this.reset();
-                        });
-                        setTimeout(function() {
-                            location.reload();
-                        }, 2000)
-                    }
-                }
-            });
+            return true;
         }
     });
 </script>

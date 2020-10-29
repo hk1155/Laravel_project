@@ -1,6 +1,7 @@
 @extends('layout.Master')
 @section('content')
 
-<h3>Hello Home</h3>
+<h3>Session Id: {{ Session::getid()}}</h3>
 
+@include('myjs.customjs')
 @endsection

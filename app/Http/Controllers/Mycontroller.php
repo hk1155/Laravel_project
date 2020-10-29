@@ -8,6 +8,7 @@ use App\addproduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use SebastianBergmann\Environment\Console;
 use Session;
 
 class Mycontroller extends Controller
@@ -73,13 +74,34 @@ class Mycontroller extends Controller
     public function insertproduct(Request $req)
     {
         $add = new addproduct([
-
             'pname' => $req->input('txtpname'),
             'price' => $req->input('txtprice'),
             'status' => 1
-
         ]);
         $add->save();
         return redirect('viewproduct');
+    }
+
+    public function deleteprod($id)
+    {
+        $d = addproduct::find($id);
+        $d->delete();
+
+        Session::flash('errmsg', $d->pname . '' . 'Deleted Successfully');
+        return redirect('viewproduct');
+    }
+
+    public function statustogle($id)
+    {
+        $sid = addproduct::find($id);
+        ($sid->status == "1") ? $status = '0' : $status = '1';
+        addproduct::where('id', $id)->update(['status' => $status]);
+        // addproduct::update()
+        return redirect('viewproduct');
+    }
+
+    public function managecategory()
+    {
+        return view('manage_category');
     }
 }

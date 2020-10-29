@@ -22,16 +22,20 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'Mycontroller@home')->name('home');
     Route::get('/viewproduct', 'Mycontroller@Viewproduct');
+    Route::get('/managecategory','Mycontroller@managecategory');
     
 });
 
 Route::view('/login', 'login')->name("login");
 Route::view('/register', 'Registration');
-Route::view('/addproduct','Addproduct');
+Route::view('/addproduct', 'Addproduct');
 
 Route::get('/logout', 'Mycontroller@logout');
+Route::get('deleteprod/{id}', 'Mycontroller@deleteprod');
+Route::get('/statustogle/{id}', 'Mycontroller@statustogle');
 
 Route::post('/adduser', 'Mycontroller@adduser');
 Route::post('/login1', 'Mycontroller@login1');
-Route::post('/insertproduct','Mycontroller@insertproduct');
+Route::post('/insertproduct', 'Mycontroller@insertproduct');
 
+Route::get('/myajax/{id}','ajaxcontroller@deleteproduct');
