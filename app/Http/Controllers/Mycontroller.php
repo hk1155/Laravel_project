@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Validator;
 use App\addproduct;
+use App\categorymodel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +26,12 @@ class Mycontroller extends Controller
         //return view('Viewproduct');
     }
 
+
+    public function managecategory()
+    {
+        $view = categorymodel::all();
+        return view('Manage_category', ["catdata" => $view]);
+    }
     public function adduser(Request $req)
     {
         // $validator =  Validator::make($req->all(), [
@@ -82,6 +89,16 @@ class Mycontroller extends Controller
         return redirect('viewproduct');
     }
 
+    public function insertcategory(Request $req)
+    {
+        $add = new categorymodel([
+            'category' => $req->input('txtcategory'),
+
+        ]);
+        $add->save();
+        return redirect('managecategory');
+    }
+
     public function deleteprod($id)
     {
         $d = addproduct::find($id);
@@ -96,12 +113,22 @@ class Mycontroller extends Controller
         $sid = addproduct::find($id);
         ($sid->status == "1") ? $status = '0' : $status = '1';
         addproduct::where('id', $id)->update(['status' => $status]);
-        // addproduct::update()
+
         return redirect('viewproduct');
     }
 
-    public function managecategory()
+    public function cattogle($id)
     {
-        return view('manage_category');
+        $data = categorymodel::find($id);
+
+        if ($data->status == '1') {
+            categorymodel::where('id', $id)->update(['status' => '0']);
+        } else {
+            categorymodel::where('id', $id)->update(['status' => '1']);
+        }
+
+        categorymodel::where('id', '=',$id);
+
+        //return redirect('managecategory');
     }
 }

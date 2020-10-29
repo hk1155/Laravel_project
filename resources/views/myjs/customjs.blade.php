@@ -20,6 +20,27 @@
         }
 
     }
+
+    function fntoglecat(id) {
+        //alert(id);
+
+        $.ajax({
+
+            url: 'cattogle/'+id,
+            type: 'GET',
+            data: {
+                catid: id
+            },
+            success: function(result) {
+
+                alert(result);
+
+            }
+
+
+        });
+
+    }
     // $(document).on('click', ".deleteprod", function() {
 
     //     // if (confirm('Are u Sure Delete ?')) {
