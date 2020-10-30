@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategorymodelsTable extends Migration
+class CreateCompanymodelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateCategorymodelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_category', function (Blueprint $table) {
+        Schema::create('tbl_company', function (Blueprint $table) {
             //$table->id();
-            $table->integer('cid')->autoIncrement();
-            $table->integer('cmpid');
-            $table->string('category');
+            $table->integer('compid')->autoIncrement();
+            $table->string('company');
             $table->enum('status', ['1', '0']);
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ class CreateCategorymodelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_category');
+        Schema::dropIfExists('tbl_company');
     }
 }

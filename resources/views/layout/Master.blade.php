@@ -1,7 +1,7 @@
 <html>
 
 <head>
-
+   
     <!-- FontAwesome Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -20,7 +20,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="/">Navbar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,6 +36,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/managecategory">Manage Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/managecompany">Manage Company</a>
                     </li>
 
                     <li class="nav-item">

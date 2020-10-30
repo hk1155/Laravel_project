@@ -11,6 +11,18 @@
                     <form method="POST" id="addproductform" action="insertcategory">
                         @csrf
                         <div class="form-group row">
+                            <label for="txtcategory" class="col-md-4 col-form-label text-md-right">{{ __('Company Name') }}</label>
+                            <div class="col-md-6">
+                                <select autofocus name="ddcompany" class="form-control">
+                                    <option value="">--Select Company</option>
+                                    @foreach($compdata as $item)
+                                    <option value="{{$item->compid}}">{{$item->company}}</option>
+
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="txtcategory" class="col-md-4 col-form-label text-md-right">{{ __('Category Name') }}</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" id="txtcategory" name="txtcategory" required autocomplete="name" autofocus>

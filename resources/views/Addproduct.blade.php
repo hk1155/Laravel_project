@@ -12,13 +12,23 @@
                         @csrf
 
                         <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('Company') }}</label>
+                            <div class="col-md-6">
+                                <select class="form-control" autofocus id="ddcompany" onchange="fnshowcat()" name="ddcompany">
+                                    <option value="">--Select Company--</option>
+                                    @foreach($compdata as $item)
+                                    <option value="{{$item->compid}}">{{$item->company}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="txtpname" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="ddcategory">
+                                <select class="form-control" id="ddcategory" name="ddcategory" disabled>
                                     <option>--Select Category--</option>
-                                    @foreach($catdata as $item)
-                                    <option value="{{$item->cid}}">{{$item->category}}</option>
-                                    @endforeach
+                                    
                                 </select>
                             </div>
                         </div>
@@ -81,5 +91,5 @@
         }
     });
 </script>
-
+@include('myjs.customjs')
 @endsection

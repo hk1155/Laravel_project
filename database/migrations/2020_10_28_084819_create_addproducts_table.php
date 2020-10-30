@@ -16,6 +16,7 @@ class CreateAddproductsTable extends Migration
         Schema::create('addproducts', function (Blueprint $table) {
             //$table->id();
             $table->integer('pid')->autoIncrement();
+            $table->string('compid');
             $table->string('catid');
             $table->string('pname');
             $table->string('price');

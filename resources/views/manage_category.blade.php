@@ -13,7 +13,7 @@
                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-
+                            <th>Id</th>
                             <th>Category</th>
                             <th>Action</th>
                         </tr>
@@ -21,16 +21,17 @@
                     <tbody>
                         @foreach($catdata as $item)
                         <tr>
+                            <td>{{$item->cid}}</td>
                             <td>{{$item->category}}</td>
                             <td>
                                 @if($item->status==1)
-                                <div id="toglediv{{$item->cid}}">
-                                    <a href="javascript:void(0);" onclick="fntoglecat('{{$item->cid}}')"><i class="fa fa-toggle-on" style="color: green;"></i></a>
-                                </div>
+                                <!-- <div id="toglediv{{$item->cid}}"> -->
+                                    <a href="javascript:void(0);" onclick="fntoglecat('{{$item->cid}}')"><i class="fa fa-toggle-on" id="t{{$item->cid}}" style="color: green;"></i></a>
+                                <!-- </div> -->
                                 @else
-                                <div id="toglediv{{$item->cid}}">
-                                    <a href="javascript:void(0);" onclick="fntoglecat('{{$item->cid}}')"><i class="fa fa-toggle-off" style="color: red;"></i></a>
-                                </div>
+                                <!-- <div id="toglediv{{$item->cid}}"> -->
+                                    <a href="javascript:void(0);" onclick="fntoglecat('{{$item->cid}}')"><i class="fa fa-toggle-off" id="t{{$item->cid}}" style="color: red;"></i></a>
+                                <!-- </div> -->
                                 @endif</td>
                         </tr>
                         @endforeach

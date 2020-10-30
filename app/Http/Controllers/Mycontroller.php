@@ -6,6 +6,7 @@ use App\User;
 use Validator;
 use App\addproduct;
 use App\categorymodel;
+use App\companymodel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,12 +24,16 @@ class Mycontroller extends Controller
     public function Viewproduct()
     {
 
+        // $data = DB::table('addproducts')
+        //     ->select('addproducts.*', 'tbl_category.category')
+        //     ->join('tbl_category', 'tbl_category.cid', '=', 'addproducts.catid')
+        //     ->toSql();
         $data = DB::table('addproducts')
-            ->select('addproducts.*', 'tbl_category.*')
+            ->select('addproducts.*', 'tbl_category.category', 'tbl_company.company')
             ->join('tbl_category', 'tbl_category.cid', '=', 'addproducts.catid')
+            ->join('tbl_company', 'tbl_company.compid', '=', 'addproducts.compid')
             ->get();
-
-        //$data = addproduct::all();
+        //dd($data);
         return view('Viewproduct', ["data" => $data]);
     }
 
@@ -88,6 +93,7 @@ class Mycontroller extends Controller
     {
         $add = new addproduct([
 
+            'compid' => $req->input('ddcompany'),
             'catid' => $req->input('ddcategory'),
             'pname' => $req->input('txtpname'),
             'price' => $req->input('txtprice'),
@@ -99,11 +105,24 @@ class Mycontroller extends Controller
     public function insertcategory(Request $req)
     {
         $add = new categorymodel([
+
+            'cmpid' => $req->input('ddcompany'),
             'category' => $req->input('txtcategory'),
 
         ]);
         $add->save();
         return redirect('managecategory');
+    }
+
+    public function insertcompany(Request $req)
+    {
+        $add = new companymodel([
+
+            'company' => $req->input('txtcompany'),
+        ]);
+
+        $add->save();
+        return redirect('managecompany');
     }
 
     public function deleteprod($id)
@@ -135,7 +154,6 @@ class Mycontroller extends Controller
         } else {
             categorymodel::where('cid', $id)->update(['status' => '1']);
         }
-
         $all = categorymodel::where('cid', $id)->first();
         if ($all->status != null) {
             return response()->json(['success' => "1", "response" => $all->status]);
@@ -146,7 +164,20 @@ class Mycontroller extends Controller
 
     public function addproduct()
     {
-        $view = categorymodel::all();
-        return view('Addproduct', ["catdata" => $view]);
+        $view = categorymodel::all()->where('status', '=', '1');
+        $viewcomp = companymodel::all()->where('status', '=', '1');
+        return view('Addproduct', ["catdata" => $view], ["compdata" => $viewcomp]);
+    }
+
+    public function addcategory()
+    {
+        $view = companymodel::all()->where('status', '=', '1');
+        return view('add_category', ["compdata" => $view]);
+    }
+
+    public function managecompany()
+    {
+        $show = companymodel::all();
+        return view('Manage_company', ['compdata' => $show]);
     }
 }

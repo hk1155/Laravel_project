@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ajaxcontroller;
 use App\Http\Controllers\Mycontroller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,21 +24,26 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'Mycontroller@home')->name('home');
     Route::get('/viewproduct', 'Mycontroller@Viewproduct');
     Route::get('/managecategory', 'Mycontroller@managecategory');
+    Route::get('/managecompany','Mycontroller@managecompany');
+    Route::get('/addproduct', 'Mycontroller@addproduct');
+    Route::get('/addcategory', 'Mycontroller@addcategory');
 });
 
 Route::view('/login', 'login')->name("login");
 Route::view('/register', 'Registration');
-Route::view('/addcategory', 'Add_category');
+
 
 Route::get('/logout', 'Mycontroller@logout');
 Route::get('deleteprod/{id}', 'Mycontroller@deleteprod');
 Route::get('/statustogle/{id}', 'Mycontroller@statustogle');
 Route::get('/cattogle/{id}', 'Mycontroller@cattogle');
-Route::get('/addproduct','Mycontroller@addproduct');
+
 
 Route::post('/adduser', 'Mycontroller@adduser');
 Route::post('/login1', 'Mycontroller@login1');
 Route::post('/insertproduct', 'Mycontroller@insertproduct');
 Route::post('/insertcategory', 'Mycontroller@insertcategory');
+Route::post('/insertcompany','Mycontroller@insertcompany');
 
 Route::get('/myajax/{id}', 'ajaxcontroller@deleteproduct');
+Route::get('/showcat/{compid}','ajaxcontroller@showcatdd');

@@ -11,10 +11,11 @@
     </button>
 </div>
 @endif
-<table class="table">
+<table id="bootstrap-data-table" class="table table-striped table-bordered">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Company</th>
             <th scope="col">Category</th>
             <th scope="col">Product Name</th>
             <th scope="col">Price</th>
@@ -25,8 +26,9 @@
         @foreach($data as $item)
         <tr id="trprod{{$item->pid}}">
             <td>{{$item->pid}}</td>
-            <td>{{$item->category}}</td>
-            <td>{{$item->pname}}</td>
+            <td>{{ucfirst($item->company)}}</td>
+            <td>{{ucfirst($item->category)}}</td>
+            <td>{{ucfirst($item->pname)}}</td>
             <td>{{$item->price}}</td>
             <td>
                 <!--<a href="deleteprod/{{$item->pid}}"><i class="fa fa-trash" style="color: red;"></i></a>&nbsp;&nbsp; -->
@@ -43,4 +45,5 @@
     </tbody>
 </table>
 @include('myjs.customjs')
+@include('myjs.mainjs')
 @endsection
