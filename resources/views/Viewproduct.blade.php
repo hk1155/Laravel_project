@@ -15,6 +15,7 @@
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Category</th>
             <th scope="col">Product Name</th>
             <th scope="col">Price</th>
             <th scope="col">Action</th>
@@ -22,18 +23,19 @@
     </thead>
     <tbody>
         @foreach($data as $item)
-        <tr id="trprod{{$item->id}}">
-            <td>{{$item->id}}</td>
+        <tr id="trprod{{$item->pid}}">
+            <td>{{$item->pid}}</td>
+            <td>{{$item->category}}</td>
             <td>{{$item->pname}}</td>
             <td>{{$item->price}}</td>
             <td>
-                <!--<a href="deleteprod/{{$item->id}}"><i class="fa fa-trash" style="color: red;"></i></a>&nbsp;&nbsp; -->
-                <a href="javascript:void(0);" onclick="fnprodelete('{{$item->id}}')"><i class="fa fa-trash" style="color: red;"></i></a>&nbsp;&nbsp;
+                <!--<a href="deleteprod/{{$item->pid}}"><i class="fa fa-trash" style="color: red;"></i></a>&nbsp;&nbsp; -->
+                <a href="javascript:void(0);" onclick="fnprodelete('{{$item->pid}}')"><i class="fa fa-trash" style="color: red;"></i></a>&nbsp;&nbsp;
 
-                @if($item->status==1)
-                <a href="statustogle/{{$item->id}}"><i class="fa fa-toggle-on" style="color: green;"></i></a>
+                @if($item->prodstatus==1)
+                <a href="statustogle/{{$item->pid}}"><i class="fa fa-toggle-on" style="color: green;"></i></a>
                 @else
-                <a href="statustogle/{{$item->id}}"><i class="fa fa-toggle-off" style="color: red;"></i></a>
+                <a href="statustogle/{{$item->pid}}"><i class="fa fa-toggle-off" style="color: red;"></i></a>
                 @endif
             </td>
         </tr>

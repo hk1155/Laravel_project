@@ -8,6 +8,7 @@ use App\addproduct;
 use App\categorymodel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use SebastianBergmann\Environment\Console;
 use Session;
@@ -21,9 +22,14 @@ class Mycontroller extends Controller
 
     public function Viewproduct()
     {
-        $data = addproduct::all();
+
+        $data = DB::table('addproducts')
+            ->select('addproducts.*', 'tbl_category.*')
+            ->join('tbl_category', 'tbl_category.cid', '=', 'addproducts.catid')
+            ->get();
+
+        //$data = addproduct::all();
         return view('Viewproduct', ["data" => $data]);
-        //return view('Viewproduct');
     }
 
 
@@ -81,9 +87,10 @@ class Mycontroller extends Controller
     public function insertproduct(Request $req)
     {
         $add = new addproduct([
+
+            'catid' => $req->input('ddcategory'),
             'pname' => $req->input('txtpname'),
             'price' => $req->input('txtprice'),
-            'status' => 1
         ]);
         $add->save();
         return redirect('viewproduct');
@@ -110,25 +117,36 @@ class Mycontroller extends Controller
 
     public function statustogle($id)
     {
-        $sid = addproduct::find($id);
-        ($sid->status == "1") ? $status = '0' : $status = '1';
-        addproduct::where('id', $id)->update(['status' => $status]);
+        //$sid = addproduct::find($id);
+        $data = addproduct::where('pid', $id)->first();
 
+        ($data->prodstatus == "1") ? $status = '0' : $status = '1';
+        addproduct::where('pid', $id)->update(['prodstatus' => $status]);
         return redirect('viewproduct');
     }
 
     public function cattogle($id)
     {
-        $data = categorymodel::find($id);
+
+        $data = categorymodel::where('cid', $id)->first();
 
         if ($data->status == '1') {
-            categorymodel::where('id', $id)->update(['status' => '0']);
+            categorymodel::where('cid', $id)->update(['status' => '0']);
         } else {
-            categorymodel::where('id', $id)->update(['status' => '1']);
+            categorymodel::where('cid', $id)->update(['status' => '1']);
         }
 
-        categorymodel::where('id', '=',$id);
+        $all = categorymodel::where('cid', $id)->first();
+        if ($all->status != null) {
+            return response()->json(['success' => "1", "response" => $all->status]);
+        } else {
+            return response()->json(['success' => "0", "error" => "There is something wrong please try again later."]);
+        }
+    }
 
-        //return redirect('managecategory');
+    public function addproduct()
+    {
+        $view = categorymodel::all();
+        return view('Addproduct', ["catdata" => $view]);
     }
 }

@@ -14,7 +14,8 @@ class CreateCategorymodelsTable extends Migration
     public function up()
     {
         Schema::create('tbl_category', function (Blueprint $table) {
-            $table->id();
+            //$table->id();
+            $table->integer('cid')->autoIncrement();
             $table->string('category');
             $table->enum('status', ['1', '0']);
             $table->timestamps();

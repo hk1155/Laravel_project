@@ -10,6 +10,19 @@
                 <div class="card-body">
                     <form method="POST" id="addproductform" action="insertproduct">
                         @csrf
+
+                        <div class="form-group row">
+                            <label for="txtpname" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="ddcategory">
+                                    <option>--Select Category--</option>
+                                    @foreach($catdata as $item)
+                                    <option value="{{$item->cid}}">{{$item->category}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="txtpname" class="col-md-4 col-form-label text-md-right">{{ __('Product Name') }}</label>
                             <div class="col-md-6">

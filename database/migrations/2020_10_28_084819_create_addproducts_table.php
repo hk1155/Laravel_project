@@ -14,10 +14,12 @@ class CreateAddproductsTable extends Migration
     public function up()
     {
         Schema::create('addproducts', function (Blueprint $table) {
-            $table->id();
+            //$table->id();
+            $table->integer('pid')->autoIncrement();
+            $table->string('catid');
             $table->string('pname');
             $table->string('price');
-            $table->enum('status',['0', '1']);
+            $table->enum('prodstatus',['1', '0']);
             $table->timestamps();
         });
     }

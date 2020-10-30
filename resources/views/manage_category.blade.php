@@ -24,12 +24,12 @@
                             <td>{{$item->category}}</td>
                             <td>
                                 @if($item->status==1)
-                                <div id="toglediv{{$item->id}}">
-                                    <a href="javascript:void(0);" onclick="fntoglecat('{{$item->id}}')"><i class="fa fa-toggle-on" style="color: green;"></i></a>
+                                <div id="toglediv{{$item->cid}}">
+                                    <a href="javascript:void(0);" onclick="fntoglecat('{{$item->cid}}')"><i class="fa fa-toggle-on" style="color: green;"></i></a>
                                 </div>
                                 @else
-                                <div id="toglediv{{$item->id}}">
-                                    <a href="javascript:void(0);" onclick="fntoglecat('{{$item->id}}')"><i class="fa fa-toggle-off" style="color: red;"></i></a>
+                                <div id="toglediv{{$item->cid}}">
+                                    <a href="javascript:void(0);" onclick="fntoglecat('{{$item->cid}}')"><i class="fa fa-toggle-off" style="color: red;"></i></a>
                                 </div>
                                 @endif</td>
                         </tr>

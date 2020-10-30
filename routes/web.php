@@ -27,13 +27,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::view('/login', 'login')->name("login");
 Route::view('/register', 'Registration');
-Route::view('/addproduct', 'Addproduct');
 Route::view('/addcategory', 'Add_category');
 
 Route::get('/logout', 'Mycontroller@logout');
 Route::get('deleteprod/{id}', 'Mycontroller@deleteprod');
 Route::get('/statustogle/{id}', 'Mycontroller@statustogle');
 Route::get('/cattogle/{id}', 'Mycontroller@cattogle');
+Route::get('/addproduct','Mycontroller@addproduct');
 
 Route::post('/adduser', 'Mycontroller@adduser');
 Route::post('/login1', 'Mycontroller@login1');
