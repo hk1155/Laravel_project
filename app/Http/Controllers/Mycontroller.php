@@ -28,6 +28,8 @@ class Mycontroller extends Controller
         //     ->select('addproducts.*', 'tbl_category.category')
         //     ->join('tbl_category', 'tbl_category.cid', '=', 'addproducts.catid')
         //     ->toSql();
+
+
         $data = DB::table('addproducts')
             ->select('addproducts.*', 'tbl_category.category', 'tbl_company.company')
             ->join('tbl_category', 'tbl_category.cid', '=', 'addproducts.catid')
@@ -164,8 +166,16 @@ class Mycontroller extends Controller
 
     public function addproduct()
     {
+        $status = 1;
+        $viewcomp = DB::table('tbl_company')
+            ->select('tbl_company.*')
+            ->join('tbl_category', 'tbl_category.cmpid', '=', 'tbl_company.compid')
+            ->where('tbl_company.status', '=', $status)
+            ->groupBy('tbl_category.cmpid')
+            ->toSql();
+        dd($viewcomp);
         $view = categorymodel::all()->where('status', '=', '1');
-        $viewcomp = companymodel::all()->where('status', '=', '1');
+        //$viewcomp = companymodel::all()->where('status', '=', '1');
         return view('Addproduct', ["catdata" => $view], ["compdata" => $viewcomp]);
     }
 

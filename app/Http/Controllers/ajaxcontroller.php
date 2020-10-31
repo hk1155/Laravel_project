@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use App\addproduct;
 use App\categorymodel;
+use App\companymodel;
 
 class ajaxcontroller extends Controller
 {
@@ -32,5 +34,38 @@ class ajaxcontroller extends Controller
             return response()->json(['success' => '0', 'error' => 'Something Went Wrong']);
         }
         //dd($data);
+    }
+
+    public function getdata($id = null)
+    {
+        if ($id != null) {
+            $data = DB::table('tbl_category')
+                ->select('tbl_category.*', 'tbl_company.company')
+                ->join('tbl_company', 'tbl_category.cmpid', '=', 'tbl_company.compid')
+                ->where('tbl_category.cmpid', '=', $id)
+                ->get();
+            if ($data != null) {
+                return response()->json($data);
+            } else {
+                return response()->json(['success' => '0', 'error' => 'Something Went Wrong Please try Again later.']);
+            }
+        } else {
+            $data = DB::table('tbl_category')
+                ->select('tbl_category.*', 'tbl_company.company')
+                ->join('tbl_company', 'tbl_category.cmpid', '=', 'tbl_company.compid')
+                ->get();
+
+            if ($data != null) {
+                return response()->json($data);
+            } else {
+                return response()->json(['success' => '0', 'error' => 'Something Went Wrong Please try Again later.']);
+            }
+        }
+    }
+
+    public function managedata()
+    {
+        $data = companymodel::all();
+        return view('Manage_data', ["compdata" => $data]);
     }
 }

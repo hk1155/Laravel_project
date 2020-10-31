@@ -71,15 +71,17 @@
                     }
                 }
             });
-        }
-        else
-        {
+        } else {
             $('#ddcategory').val("");
             $('#ddcategory').prop('disabled', true);
             alert('Please Select Company');
         }
 
     }
+
+  
+
+    
     // $(document).on('click', ".deleteprod", function() {
 
     //     // if (confirm('Are u Sure Delete ?')) {

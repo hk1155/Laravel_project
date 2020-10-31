@@ -40,6 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/managecompany">Manage Company</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/managedata">Manage Data</a>
+                    </li>
 
                     <li class="nav-item">
                         <p class="nav-link">Welcome {{ Auth::user()->name }}</p>
