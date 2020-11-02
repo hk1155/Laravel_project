@@ -34,12 +34,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/statustogle/{id}', 'Mycontroller@statustogle');
     Route::get('/cattogle/{id}', 'Mycontroller@cattogle');
     Route::post('/insertproduct', 'Mycontroller@insertproduct');
-    Route::post('/insertcategory', 'Mycontroller@insertcategory');
+    // Route::post('/insertcategory', 'Mycontroller@insertcategory');
     Route::post('/insertcompany', 'Mycontroller@insertcompany');
+    Route::post('/insertcat', 'ajaxcontroller@insertcat');
 
     Route::get('/myajax/{id}', 'ajaxcontroller@deleteproduct');
     Route::get('/showcat/{compid}', 'ajaxcontroller@showcatdd');
     Route::get('/getData/{id?}', 'ajaxcontroller@getdata');
+    Route::get('/editcat/{id}', 'Mycontroller@editcat');
+    Route::post('/updatecat', 'Mycontroller@updatecat');
 });
 
 Route::view('/login', 'login')->name("login");

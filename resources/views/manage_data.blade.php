@@ -53,7 +53,7 @@
                 data: 'category'
             },
             {
-                "data": "CarerID",
+                "data": "cid",
                 "render": function(data, type, row) {
                     return '<a href="javascript:void(0)">Delete</a>';
                 }

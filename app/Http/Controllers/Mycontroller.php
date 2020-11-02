@@ -23,13 +23,6 @@ class Mycontroller extends Controller
 
     public function Viewproduct()
     {
-
-        // $data = DB::table('addproducts')
-        //     ->select('addproducts.*', 'tbl_category.category')
-        //     ->join('tbl_category', 'tbl_category.cid', '=', 'addproducts.catid')
-        //     ->toSql();
-
-
         $data = DB::table('addproducts')
             ->select('addproducts.*', 'tbl_category.category', 'tbl_company.company')
             ->join('tbl_category', 'tbl_category.cid', '=', 'addproducts.catid')
@@ -42,7 +35,11 @@ class Mycontroller extends Controller
 
     public function managecategory()
     {
-        $view = categorymodel::all();
+        $view = DB::table('tbl_company')
+            ->select('tbl_company.company', 'tbl_category.*')
+            ->join('tbl_category', 'tbl_category.cmpid', '=', 'tbl_company.compid')
+            ->get();
+        // /dd($view);
         return view('Manage_category', ["catdata" => $view]);
     }
     public function adduser(Request $req)
@@ -168,12 +165,12 @@ class Mycontroller extends Controller
     {
         $status = 1;
         $viewcomp = DB::table('tbl_company')
-            ->select('tbl_company.*')
+            ->select('tbl_company.*', 'tbl_category.cid')
             ->join('tbl_category', 'tbl_category.cmpid', '=', 'tbl_company.compid')
             ->where('tbl_company.status', '=', $status)
             ->groupBy('tbl_category.cmpid')
-            ->toSql();
-        dd($viewcomp);
+            ->get();
+        //dd($viewcomp);
         $view = categorymodel::all()->where('status', '=', '1');
         //$viewcomp = companymodel::all()->where('status', '=', '1');
         return view('Addproduct', ["catdata" => $view], ["compdata" => $viewcomp]);
@@ -189,5 +186,27 @@ class Mycontroller extends Controller
     {
         $show = companymodel::all();
         return view('Manage_company', ['compdata' => $show]);
+    }
+
+    public function editcat($id)
+    {
+        //$data = categorymodel::where('cid', $id)->first();
+        $data = DB::table('tbl_company')
+            ->select('tbl_company.company', 'tbl_category.*')
+            ->join('tbl_category', 'tbl_category.cmpid', '=', 'tbl_company.compid')
+            ->where('tbl_category.cid', '=', $id)
+            ->first();
+        $viewcomp = companymodel::all();
+        return view('Editcat', ['catdata' => $data], ['compdata' => $viewcomp]);
+    }
+    public function updatecat(Request $req)
+    {
+        //$add = categorymodel::where('cid','=', $req->input('hid'))->first();
+        $id = $req->get('txthid');
+        $add = categorymodel::where("cid","=","6")->first();
+        $add->cmpid = "1212";
+        $add->category = "category";
+        $add->save();
+        // return redirect('managecategory');
     }
 }

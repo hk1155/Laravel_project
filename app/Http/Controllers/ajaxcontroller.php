@@ -65,7 +65,30 @@ class ajaxcontroller extends Controller
 
     public function managedata()
     {
-        $data = companymodel::all();
+        $data =  DB::table('tbl_company')
+            ->select('tbl_company.*', 'tbl_category.cid')
+            ->join('tbl_category', 'tbl_category.cmpid', '=', 'tbl_company.compid')
+            ->where('tbl_company.status', '=', '1')
+            ->groupBy('tbl_category.cmpid')
+            ->get();
         return view('Manage_data', ["compdata" => $data]);
+    }
+
+    public function insertcat(Request $req)
+    {
+
+        $add = new categorymodel([
+
+            'cmpid' => $req->get('comp'),
+            'category' => $req->input('cat'),
+
+        ]);
+        $add->save();
+        if ($add != null) {
+            return response()->json(['success' => '1', 'response' => 'Data inserted Successfully']);
+        } else {
+            return response()->json(['success' => '0', 'error' => 'Something Went Wrong please Try Again Later.']);
+        }
+        
     }
 }

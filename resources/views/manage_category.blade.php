@@ -14,6 +14,7 @@
                     <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Company</th>
                             <th>Category</th>
                             <th>Action</th>
                         </tr>
@@ -22,17 +23,21 @@
                         @foreach($catdata as $item)
                         <tr>
                             <td>{{$item->cid}}</td>
+                            <td>{{$item->company}}</td>
                             <td>{{$item->category}}</td>
                             <td>
                                 @if($item->status==1)
                                 <!-- <div id="toglediv{{$item->cid}}"> -->
-                                    <a href="javascript:void(0);" onclick="fntoglecat('{{$item->cid}}')"><i class="fa fa-toggle-on" id="t{{$item->cid}}" style="color: green;"></i></a>
+                                <a href="javascript:void(0);" onclick="fntoglecat('{{$item->cid}}')"><i class="fa fa-toggle-on" id="t{{$item->cid}}" style="color: green;"></i></a>&nbsp;&nbsp;
                                 <!-- </div> -->
                                 @else
                                 <!-- <div id="toglediv{{$item->cid}}"> -->
-                                    <a href="javascript:void(0);" onclick="fntoglecat('{{$item->cid}}')"><i class="fa fa-toggle-off" id="t{{$item->cid}}" style="color: red;"></i></a>
+                                <a href="javascript:void(0);" onclick="fntoglecat('{{$item->cid}}')"><i class="fa fa-toggle-off" id="t{{$item->cid}}" style="color: red;"></i></a>&nbsp;&nbsp;
                                 <!-- </div> -->
-                                @endif</td>
+                                @endif
+                                <a href="editcat/{{$item->cid}}"><i class="fa fa-edit" style="color: blue;"></i></a>
+                            </td>
+
                         </tr>
                         @endforeach
                     </tbody>
