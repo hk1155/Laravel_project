@@ -44,6 +44,7 @@ class Mycontroller extends Controller
     }
     public function adduser(Request $req)
     {
+		//okoko
         // $validator =  Validator::make($req->all(), [
         //     'email' => ['unique:users']
         // ]);
